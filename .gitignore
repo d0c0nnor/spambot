@@ -4,3 +4,4 @@ spambot_py
 data
 *.swp
 *.pyc
+.DS_store
