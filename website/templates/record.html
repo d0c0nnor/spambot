@@ -1,15 +1,17 @@
 {% extends "layout.html" %}
 {% block body %}
+<h1>Your Spam is Served</h1>
 
-<h1>Record Some Spam</h1>
+<p> We should be calling you right now, if possible, we would love you
+    to read the piece below as if you were
+    feeling <strong>{{spam.emotion}}</strong>.
+</p>
 
-<ul class="nav nav-pills">
-  <li class="active">
-    <a href="#">Using your phone</a>
-  </li>
-  <li>
-    <a href="#">Using your microphone.</a>
-  </li>
-</ul>
+<p> When you're finished just hang up. You don't need to say goodbye.</p>
+
+
+<blockquote>
+  {{spam.spam_text}} 
+</blockquote>
 
 {% endblock %}
