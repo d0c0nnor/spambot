@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block body %}
+<h1>Welcome to spambot</h1>
+<p>Please enter your telephone number and record the following:</p>
+{% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
+<form action="{{url_for('make_call')}}" method=post>
+  
+  <label>Phone:</label>
+  <input type="text" placeholder="Intl. Phone Number" name="number"></input>
+  <span class="help-block">Please include the international
+    dialling code and your prefix. </span>
+  <button type="submit" class="btn">Call me back!</button>
+</form>
+{% endblock %}

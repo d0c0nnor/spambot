@@ -52,10 +52,12 @@
         </div>
       </div>
     </div>
-
     
     {% for message in get_flashed_messages() %}
-    <div class=flash>{{ message }}</div>
+    <div class="alert">
+      <a class="close" href="#">×</a>
+      <span>{{message}}</span>
+    </div>
     {% endfor %}
 
     <div class="container">
