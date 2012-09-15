@@ -22,13 +22,31 @@ def get_next_spam():
             "emotion" : emotion} 
    
 def save_spam_recording(spam_id, emotion, url):
-    with open("recordings.csv", "a") as f:
+    with open(settings.RECORDINGS_PATH, "a") as f:
         f.write(spam_id + "," + emotion + "," + url + "\n")
 
-def get_recordings():
-    with open("recordings.csv", "r") as f:
+def get_recordings_str():
+    with open(settings.RECORDINGS_PATH, "r") as f:
         return f.read()
+
+def get_recordings():
+    with open(settings.RECORDINGS_PATH, 'rb') as csvfile:
+        recordings = []
+        for line in csvfile.readlines():
+            recording_list = line.split(",")
+            recordings.append({"spam_id" : recording_list[0],
+                               "emotion" : recording_list[1],
+                               "url": recording_list[2]})
+        return recordings
+            
+def get_next_recording():
+    return random.choice(get_recordings())
         
+
+
+    
+
+    
         
     
     
