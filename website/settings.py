@@ -12,4 +12,7 @@ EMOTIONS = ["angry",
             "bashful"]
 
 
+DATABASE_PATH="/var/spambot/spam.db"
+
+
 

@@ -6,13 +6,12 @@
   spam.</p>
 
   <p>To participate, please enter your phone number below and we'll call you back.</p>
-  
-  <form action="{{url_for('record')}}" method="POST">
-    <input type="text" placeholder="+ [Country] [Area] [Number]" name="number" />
+
+  <form action="{{url_for('welcome')}}" method="POST">
+    <input type="text" placeholder="+4444342342434324" name="number" />
     <span class="help-block">Please include the international
       dialling code and your prefix. </span>
-    <button type="submit" class="btn btn-primary btn-large">Call me back!</button>
+    <button type="submit" class="btn btn-primary btn-large">Get Started!</button>
   </form>
-
 
 {% endblock %}

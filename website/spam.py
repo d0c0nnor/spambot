@@ -1,5 +1,9 @@
 # Module for collecting ( pre-collected ) spam
 import settings, random, os
+import sqlite3
+
+def _get_db_connection():
+    return sqlite3.connect(settings.DATABASE_PATH)
 
 def _get_spam_ids():
     return os.listdir(settings.DATA_PATH)

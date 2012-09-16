@@ -1,19 +1,33 @@
 {% extends "layout.html" %}
 {% block body %}
+
 <h1>Your Spam is Served</h1>
 
-<p> We should be calling you right now, if possible, we would love you
+<h3> If this peace of Spam speaks to you, if possible, we would love you
     to read the piece below as if you were
-    feeling:
-</p>
+    feeling <span class="large">{{spam.emotion}}</span></h3>
 
-<h1>{{spam.emotion}}</h1>
+<p>Alternatively, if this piece looks like it's no fun or just gobbledygook, you can <a href="{{ url_for('record', to_number=to_number) }}">request another</a></p>
 
-<p> When you're finished just hang up. You don't need to say goodbye.</p>
-
-
-<blockquote>
+<div class="box">
+<br />
+<br />
+<br />
+<blockquote class="lead">
   {{spam.spam_txt}} 
 </blockquote>
+</div>
+
+<br />
+<br />
+<br />
+
+<button id="place_call_button" class="btn btn-primary btn-large" data-number="{{to_number}}" data-spam-id="{{spam.spam_id}}" data-emotion="{{spam.emotion}}">Start recording</button>
+
+<br />
+<br />
+<br />
+
+<p> We'll call you back, when you're finished just hang up. You don't need to say goodbye.</p>
 
 {% endblock %}

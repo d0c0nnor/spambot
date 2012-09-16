@@ -32,16 +32,13 @@
   </head>
 
   <body>
-
-    {% for message in get_flashed_messages() %}
-    <div class="alert">
-      <a class="close" href="#">×</a>
-      <span>{{message}}</span>
-    </div>
+    <div class="container">
+      {% for message in get_flashed_messages() %}
+      <div class="alert-error">
+	<span>{{message}}</span>
+      </div>
     {% endfor %}
 
-    <div class="container">
-    
     {% block body %}{% endblock %}
 
     </div>
@@ -51,6 +48,9 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="{{ url_for('static', filename='js/jquery.js')}}"></script>
     <script src="{{ url_for('static', filename='js/bootstrap.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/spambot.js')}}"></script>
+    <script type="text/javascript" src="http://static.twilio.com/libs/twiliojs/1.0/twilio.js"></script>
+
   </body>
 </html>
 
