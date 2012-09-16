@@ -103,6 +103,8 @@ for account in accounts:
       ratio = float(content_white_spaces) / content_len
       if ratio < 0.1:
         continue
+      if len(content) > 1000:
+        continue
 
       content_hash = hash(content)
       destination_folder = data_folder + '/' + content_hash
