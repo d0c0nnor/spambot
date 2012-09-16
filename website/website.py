@@ -63,10 +63,10 @@ def place_call():
         abort(400)
     else:
         client = TwilioRestClient(settings.ACCOUNT_SID, settings.AUTH_TOKEN)
-        # call = client.calls.create(to="+" + to_number,  
-        #                        from_=settings.OUR_NUMBER, 
-        #                        url=_fqurl("/handle_call/" + emotion + "/" + spam_id))
-        #logging.info("Started call: " +  call.sid)
+        call = client.calls.create(to="+" + to_number,  
+                               from_=settings.OUR_NUMBER, 
+                               url=_fqurl("/handle_call/" + emotion + "/" + spam_id))
+        logging.info("Started call: " +  call.sid)
         return "Success"
 
 
@@ -108,6 +108,12 @@ def dial_a_spam():
         return render_template("dial_a_spam.html")
 
 
+
+@app.route("/next_recording", methods=["GET"])
+def next_recording():
+    return json.dumps(get_next_recording())
+
+    
 # Methods that handle the actual recording from twilio
 @app.route("/play_a_spam/", methods=["GET"])
 def play_a_spam():
@@ -123,6 +129,6 @@ def handle_dial_a_spam():
 
 if __name__ == "__main__":
     app.secret_key = '\xe8Rd\xf3\xec\x8c\xd7\x12\x03J\xd2\xdb\x14\xa3\xa8\xdf\x11\x0b\xb1)\xd4g\xf4\xa5'
-    app.run(host='0.0.0.0', port=80, use_reloader=True)
+    app.run(host='0.0.0.0', port=80)
 
 
