@@ -26,7 +26,7 @@ if len(sys.argv) != 3:
   sys.exit(-1)
 
 csvurl = sys.argv[1]
-data_folder = sys.argv[2]
+data_folder = os.path.abspath(sys.argv[2])
 
 csv = urllib2.urlopen(csvurl)
 for line in csv:

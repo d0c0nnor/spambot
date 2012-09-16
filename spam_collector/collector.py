@@ -42,7 +42,7 @@ if len(sys.argv) != 2:
 
 accounts = 'mail abc a aa aaa email no yes spam'.split(' ')
 
-data_folder = sys.argv[1]
+data_folder = os.path.abspath(sys.argv[1])
 
 #os.chdir(path)
 for account in accounts:
