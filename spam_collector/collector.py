@@ -5,6 +5,7 @@ import poplib
 import re
 import sys
 import md5
+import base64
 import uuid
 
 usage = """
@@ -36,11 +37,29 @@ def is_valid(data):
 def hash(data):
   return md5.new(data).hexdigest()
 
+def cleanup(data):
+  content = remove_html_tags(data)
+  content = remove_html_escapes(content)
+  content = remove_extra_spaces(content)
+  content = remove_links(content)
+  content = remove_html_tags(content)
+  return content
+
+def get_msg_payload(data):
+  msg = email.message_from_string(data)
+  if msg.is_multipart():
+    payload = msg.get_payload(0)
+  else:
+    payload = msg.get_payload()
+  return payload
+
+
 if len(sys.argv) != 2:
   print usage
   sys.exit(-1)
 
 accounts = 'mail abc a aa aaa email no yes spam'.split(' ')
+
 
 data_folder = os.path.abspath(sys.argv[1])
 
@@ -56,27 +75,34 @@ for account in accounts:
     print "retrieving message #{0}".format(i+1)
     lines = M.retr(i+1)[1]
     content = '\n'.join(lines)
-    msg = email.message_from_string(content)
-    if msg.is_multipart():
-      payload = msg.get_payload(0)
-    else:
-      payload = msg.get_payload()
+    payload = get_msg_payload(content)
     if payload != None and type(payload) is str:
-      content = remove_html_tags(payload)
-      content = remove_html_escapes(content)
-      content = remove_extra_spaces(content)
-      content = remove_links(content)
-      content = remove_html_tags(content)
+      content = cleanup(payload)
+      if content.count(' ') == 0:
+        content = base64.b64decode(content)
+        content = get_msg_payload(content)
+        content = cleanup(content)
+      if content.count(' ') == 0:
+        continue
+
+      content_white_spaces = content.count(' ')
+      content_len = len(content)
+      ratio = float(content_white_spaces) / content_len
+      if ratio < 0.1:
+        continue
+
       content_hash = hash(content)
       destination_folder = data_folder + '/' + content_hash
       destination_file = destination_folder + '/' + message_file_name
       if not os.path.exists(destination_folder):
         print "saving {0}".format(content_hash)
         print content
+        print "ratio: {0}/{1}={2}".format(content_white_spaces, content_len, ratio)
         os.makedirs(destination_folder)
         f = open(destination_file, 'w')
         f.write(content)
         f.close()
+    raw_input("press return")
 
 """
   s = raw_input("press 'n' for next, 's' for speak...\n\n\n")
