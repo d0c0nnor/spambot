@@ -1,4 +1,4 @@
-DATA_PATH="/home/arthack/spambot/spam_data"
+DATA_PATH="/var/spambot/data"
 RECORDINGS_PATH="/var/spambot/recordings.csv"
 BASE_URL = "http://134.0.22.13"
 

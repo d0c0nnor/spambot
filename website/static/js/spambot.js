@@ -9,7 +9,7 @@ $(document).ready(function(){
 	$.post('/call',
 	       {"to_number" : number, "emotion" : emotion, "spam_id": spam_id},
 	       function(data) {
-		   $("#place_call_button").text("Call back request placed")
+		   $("#place_call_button").text("Stand by, we're calling you back.")
 	       }
 	      );
     });
