@@ -14,6 +14,7 @@ usage:
 """.format(sys.argv[0])
 
 message_file_name = 'message.txt'
+topic_file_name = 'topic.txt'
 
 def remove_html_tags(data):
   p = re.compile(r'<.*?>')
@@ -53,6 +54,18 @@ def get_msg_payload(data):
     payload = msg.get_payload()
   return payload
 
+def any_word_in_string(words, string):
+  for word in words:
+    if word.lower() in string.lower():
+      return True
+  return False
+
+def get_topic(data):
+  if any_word_in_string(['viagra', 'sex', 'penis', 'porn', 'teen', 'milf', 'tit', 'suck'], data):
+    return 'sex'
+  if any_word_in_string(['money', 'gain', '$', 'dollar', 'euro'] , data):
+    return 'money'
+  return 'neutral'
 
 if len(sys.argv) != 2:
   print usage
@@ -94,6 +107,7 @@ for account in accounts:
       content_hash = hash(content)
       destination_folder = data_folder + '/' + content_hash
       destination_file = destination_folder + '/' + message_file_name
+      destination_topic_file = destination_folder + '/' + topic_file_name
       if not os.path.exists(destination_folder):
         print "saving {0}".format(content_hash)
         print content
@@ -102,7 +116,10 @@ for account in accounts:
         f = open(destination_file, 'w')
         f.write(content)
         f.close()
-    raw_input("press return")
+        f = open(destination_topic_file, 'w')
+        f.write(get_topic(content))
+        f.close()
+#    raw_input("press return")
 
 """
   s = raw_input("press 'n' for next, 's' for speak...\n\n\n")
