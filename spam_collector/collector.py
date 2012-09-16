@@ -61,7 +61,7 @@ def any_word_in_string(words, string):
   return False
 
 def get_topic(data):
-  if any_word_in_string(['viagra', 'sex', 'penis', 'porn', 'teen', 'milf', 'tit', 'suck'], data):
+  if any_word_in_string(['viagra', 'sex', 'penis', 'porn', 'teen', 'milf', 'tit', 'suck', 'cock', 'dick'], data):
     return 'sex'
   if any_word_in_string(['money', 'gain', '$', 'dollar', 'euro'] , data):
     return 'money'
@@ -71,7 +71,7 @@ if len(sys.argv) != 2:
   print usage
   sys.exit(-1)
 
-accounts = 'mail abc a aa aaa email no yes spam'.split(' ')
+accounts = 'mail abc a aa aaa email no yes spam hi hello bye xxx x'.split(' ')
 
 
 data_folder = os.path.abspath(sys.argv[1])
