@@ -159,11 +159,10 @@ textarea {
 
 body {
   margin: 0;
-  font-family: "Courier", fixed-width;
+  font-family: "Helvetica Neue", fixed-width;
   font-size: 14px;
   line-height: 20px;
   color: #333333;
-  background-color: #ffffff;
 }
 
 a {

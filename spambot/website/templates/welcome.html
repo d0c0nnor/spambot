@@ -1,21 +1,44 @@
 {% extends "layout.html" %}
 {% block body %}
-  <h1>WARM SPAM!</h1>
 
-  <p>
-    Good afternoon, my friend tender. CONGRATULATIONS! THIS is WARMSPAM! Welcome!
-  </p>
-  <p>
-    Join in WarMly!
-  </p>
+<div class="row">
 
-  <p>Take Part, please insert number.</p>
+  <div class="span12 pagination-centered">
+    <h1>
+      <img src="{{ url_for('static', filename='img/spam.png')}}" class="img-rounded">
+    </h1>
+  </div>
 
-  <form action="{{url_for('welcome')}}" method="POST">
-    <input type="text" placeholder="+4444342342434324" name="number" />
-    <span class="help-block">Please remember the international
-      dialling code and your prefix. </span>
-    <button type="submit" class="btn btn-primary btn-large">Get Started!</button>
-  </form>
+  
+  <div class="span12 pagination-centered">
+
+    <br />
+    <br />
+    <br />
+    <div class="lead">
+    <p>Welcome to the <strong>warm spam</strong> project, part of the <a href="http://www.thedigitalsizzle.com/">Digital Sizzle 2012
+      hackathon.</a></p>
+
+    <p>This project has two parts. A website, that collects
+    recordings of people reading spam messages, and a
+    radio station, where those recordings are made into something
+    beautiful by combining them with an algorithmic composition by the guys
+    at <a href="http://reactifymusic.com">Reactify</a>
+
+      <p>If you would like to participate, and have you're voice heard
+      saying potentially naughty things in the Whitechapel Gallery on
+      September 26th, you will need a phone and a seperate screen from
+      which to read the piece of spam that you're going to record.
+      </p>
+      <br />
+      <a href="http://google.com">Get Started!</a>
+    </div>
+  </div>
+</div>
+
+
+
+
+
 
 {% endblock %}
