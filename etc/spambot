@@ -1,0 +1,17 @@
+<VirtualHost *:80>
+    ServerName www.warmspam.com
+    LogLevel info
+
+    WSGIDaemonProcess spambot user=arthack group=arthack processes=2 threads=15
+    WSGIProcessGroup spambot
+
+    WSGIScriptAlias / /home/arthack/spambot/etc/spambot.wsgi
+
+    <Directory /home/arthack/spambot>
+        Order deny,allow
+        Allow from all
+    </Directory>
+</VirtualHost>
+
+
+
