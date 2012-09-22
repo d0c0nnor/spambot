@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block body %}
+  <h1>DIAL A SPAM</h1>
+
+  <p>Hello there, give us your number we will give you some spam!</p>
+  
+  <form action="{{url_for('dial_a_spam')}}" method="POST">
+    <input type="text" placeholder="+ [Country] [Area] [Number]" name="number" />
+    <span class="help-block">Please include the international
+      dialling code and your prefix. </span>
+    <button type="submit" class="btn btn-primary btn-large">Call me back!</button>
+  </form>
+</div>
+
+
+{% endblock %}

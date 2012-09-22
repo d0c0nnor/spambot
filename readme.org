@@ -1,0 +1,21 @@
+* Introduction
+
+This is the code base for the 'Warm Spam' project completed as part of
+the [[http://www.thedigitalsizzle.com/][Digital Sizzle Art/Data hackathon 2012.]]
+
+The premise of the project was to capture people reading spam messages
+and to play back the recordings in a gallery context.
+
+To that end it consisted of the following: 
+
+- A spam collector service that collected spam from [[mailinator.com]] 
+- A website that used the Twillio API to capture recordings
+- A Pure Data program that generated a radio station based on the
+  captured recordings.
+
+* Contributors
+
+- Graham Hooper
+- Tiziano Santoro
+- Ragnar Hrafnkelsson
+- Tom Rushmore

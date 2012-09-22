@@ -1,0 +1,24 @@
+* General 
+** Code cleanup
+*** TODO Move everything into one module
+*** TODO Fix the deployment scenarios
+**** Serve with mod-wsgi
+**** Fix the domain name issue
+*** TODO Fix Github virtual env
+* Website
+** TODO Redesign
+** TODO About page
+** TODO Mobile support
+* Player
+** TODO Integrate wav file playing
+** TODO Audio streaming 
+** TODO Shoutcast server
+* Spam Collector
+** TODO Move code into a main method
+** TODO Make it more robust to failure in the pop layer
+
+* Nice to have
+** TODO Document classification in the spam collector
+** TODO Nice logo
+** TODO Domain name
+

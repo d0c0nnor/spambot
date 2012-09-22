@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<h1>Your Spam is Served</h1>
+
+<p>
+  These pieces of spam are randomly selected, if this piece looks like
+  it's no fun, that it's too long or just gobbledygook,
+  please <a href="{{ url_for('record', to_number=to_number)
+  }}">request another</a>
+</p>
+
+<div class="box">
+<br />
+<br />
+<br />
+<blockquote class="lead">
+  {{spam.spam_txt}} 
+</blockquote>
+</div>
+
+<br />
+<br />
+<br />
+
+<button id="place_call_button" class="btn btn-primary btn-large" data-number="{{to_number}}" data-spam-id="{{spam.spam_id}}" data-emotion="{{spam.emotion}}">Start recording</button>
+
+<br />
+<br />
+<br />
+
+<p> We'll call you back, when you're finished just hang up. You don't need to say goodbye.</p>
+
+{% endblock %}
