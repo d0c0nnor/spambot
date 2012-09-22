@@ -1,10 +1,10 @@
 * General 
 ** Code cleanup
-*** TODO Move everything into one module
-*** TODO Fix the deployment scenarios
+*** DONE Move everything into one module
+*** DONE Fix the deployment scenarios
 **** Serve with mod-wsgi
-**** Fix the domain name issue
-*** TODO Fix Github virtual env
+
+*** DONE Fix Github virtual env
 * Website
 ** TODO Redesign
 ** TODO About page
@@ -21,4 +21,6 @@
 ** TODO Document classification in the spam collector
 ** TODO Nice logo
 ** TODO Domain name
-
+* Waiting
+** Fix the domain name issue
+** Internet Radio
