@@ -5,8 +5,8 @@ import twilio.twiml
 import json
 import re
 import logging
-from spam import get_next_spam, save_spam_recording, get_recordings_str, get_next_recording
-import settings
+from spambot.spam import get_next_spam, save_spam_recording, get_recordings_str, get_next_recording
+import spambot.website.settings
 
 logging.basicConfig(level=logging.INFO)
 
