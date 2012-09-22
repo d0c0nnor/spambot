@@ -1,16 +1,77 @@
-$(document).ready(function(){
+window.Spam = Backbone.Model.extend({
     
-    $("#place_call_button").click(function(e){
-	$(this).addClass("disabled")
-	var number = $(this).attr("data-number")
-	var emotion = $(this).attr("data-emotion")
-	var spam_id = $(this).attr("data-spam-id")
-
-	$.post('/call',
-	       {"to_number" : number, "emotion" : emotion, "spam_id": spam_id},
-	       function(data) {
-		   $("#place_call_button").text("Stand by, we're calling you back.")
-	       }
-	      );
-    });
 })
+
+window.SpamFactory = {
+    get_next_spam : function(){
+        console.log("Getting next spam!")
+    }
+}
+
+
+window.WelcomeView = Backbone.View.extend({
+
+    el: "#content",
+
+    template: _.template($('#welcome_template').html()),
+    
+    initialize:function () {
+    },
+
+    events:{
+        "click #showMeBtn":"showMeBtnClick"
+    },
+
+    render:function () {
+        $(this.el).html(this.template());
+        return this;
+    },
+
+    showMeBtnClick:function () {
+        app.headerView.search();
+    }
+
+});
+
+
+window.RecordView = Backbone.View.extend({
+    
+
+})
+
+
+var AppRouter = Backbone.Router.extend({
+
+    routes: {
+        ""                  : "welcome",
+        "/record"           : "record", 
+        
+        // "wines/page/:page"	: "list",
+        // "wines/add"         : "addWine",
+        // "wines/:id"         : "wineDetails",
+        // "about"             : "about"
+    },
+
+    initialize: function () {
+        
+    },
+
+    welcome: function() {
+        if (!this.welcome_view) {
+            this.welcome_view = new WelcomeView();
+        }
+        
+        this.welcome_view.render()
+    },
+
+    record: function() {
+        this.record_view = new RecordView();
+    }
+    
+
+});
+
+app = new AppRouter();
+Backbone.history.start();
+
+

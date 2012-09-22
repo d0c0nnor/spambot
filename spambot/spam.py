@@ -18,7 +18,7 @@ def get_next_spam():
     spam_txt = _get_spam_txt(spam_id)
     emotion = random.choice(settings.EMOTIONS)
 
-    return {"spam_id" : spam_id,
+    return {"id" : spam_id,
             "spam_txt" : spam_txt,
             "emotion" : emotion} 
    

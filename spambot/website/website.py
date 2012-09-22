@@ -6,44 +6,33 @@ import json
 import re
 import logging
 from spambot.spam import get_next_spam, save_spam_recording, get_recordings_str, get_next_recording
-import spambot.website.settings
 
 logging.basicConfig(level=logging.INFO)
 
 VALID_PHONE_NUMBER = re.compile('^[0-9]*$')
 
 app = Flask(__name__)
+app.config.from_object('spambot.website.settings')
+app.config.from_envvar('SPAMBOT_SETTINGS')
 
 def _fqurl(path):
     return settings.BASE_URL + path
 
 @app.route("/", methods=["GET", "POST"])
 def welcome():
-    if request.method == "POST":
-        to_number = request.form['number']
+    return render_template("app.html")
 
-        if(to_number.startswith("00")):
-            to_number = to_number[2:]
-        elif(to_number.startswith("+")):
-            to_number = to_number[1:]
-        else:
-            flash("Please enter a valid phone number, +[Country Code][Area Code][Number]")
-            return redirect(url_for('welcome'))
 
-        if not VALID_PHONE_NUMBER.match(to_number):
-            flash("Please enter a valid phone number, +[Country Code][Area Code][Number]")
-            return redirect(url_for('welcome'))
-        else:
-            return redirect(url_for('record',to_number=to_number))
+@app.route("/spam/next", methods=["GET"])
+def next_spam():
+    return json.dumps(get_next_spam)
 
-    return render_template("welcome.html")
-
+# Everything after this is subject to deletion!
 @app.route("/recordings")
 def recordings():
     return get_recordings_str()
 
 # Rest routes for recording through the browser / through the browser with the client.
-
 @app.route("/record/<to_number>", methods=["GET", "POST"])
 def record(to_number):
     spam = get_next_spam()
@@ -129,6 +118,6 @@ def handle_dial_a_spam():
 
 if __name__ == "__main__":
     app.secret_key = '\xe8Rd\xf3\xec\x8c\xd7\x12\x03J\xd2\xdb\x14\xa3\xa8\xdf\x11\x0b\xb1)\xd4g\xf4\xa5'
-    app.run(host='0.0.0.0', port=8080)
+    app.run(host='0.0.0.0', port=8080, debug=True)
 
 

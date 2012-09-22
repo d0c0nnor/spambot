@@ -6,7 +6,10 @@
 
 *** DONE Fix Github virtual env
 * Website
-** TODO Redesign
+** DONE Redesign
+** Record Page
+- Change settings so I can run locally
+- 
 ** TODO About page
 ** TODO Mobile support
 * Player
