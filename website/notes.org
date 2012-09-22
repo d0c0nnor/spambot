@@ -1,8 +1,0 @@
-
-
-
-* Nice things
-** TODO Good error page
-** TODO Welcome page
-** TODO Nice logo
-** TODO Domain name
