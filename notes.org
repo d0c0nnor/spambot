@@ -12,6 +12,7 @@
 ** DONE About page
 ** DONE Mobile support
 ** TODO Mobile Warning
+** TODO Fix validation stuff.
 * Player
 ** TODO Integrate wav file playing
 ** TODO Audio streaming 

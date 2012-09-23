@@ -1,0 +1,382 @@
+#N canvas 783 85 587 737 10;
+#X declare -path .;
+#X declare -path rj;
+#X declare -path sounds;
+#X declare -path abs;
+#X declare -path pd;
+#X declare -path abs/oscx;
+#N canvas 515 156 475 268 init 0;
+#N canvas 0 22 588 274 LICENSE 0;
+#X text 79 84 (c) 2008 Reality Jockey;
+#X text 57 36 Released under the GNU General Public License ver. 3
+or later. See the file LICENSE.txt for the full text.;
+#X restore -199 19 pd LICENSE;
+#X obj -199 47 OVERVIEW;
+#X obj 79 19 declare -path .;
+#X obj 79 46 declare -path rj;
+#X text -131 47 of all RjDj abstractions;
+#X obj 79 99 declare -path sounds;
+#X obj -199 90 loadbang;
+#X msg -199 114 \; pd dsp 1;
+#X obj 79 159 declare -path abs;
+#X obj 79 219 declare -path pd;
+#X obj 79 179 declare -path abs/oscx;
+#X connect 6 0 7 0;
+#X restore 49 44 pd init;
+#N canvas 442 303 521 324 timebase 0;
+#X obj 18 146 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+1;
+#X obj 18 15 loadbang;
+#X obj 18 228 s \$0-tick;
+#X obj 18 188 f;
+#X obj 52 188 + 1;
+#X obj 18 167 metro 72.11;
+#X obj 143 66 m_bpm2ms;
+#X msg 143 39 80;
+#X floatatom 143 88 5 0 0 0 - - -;
+#X obj 143 107 / 8;
+#X floatatom 143 129 5 0 0 0 - - -;
+#X obj 18 37 t b b;
+#X obj 65 63 r \$0-bpm;
+#X obj 70 137 t b f;
+#X obj 118 188 f;
+#X obj 152 188 + 1;
+#X obj 118 167 metro 72.11;
+#X obj 118 228 s \$0-money-tick;
+#X obj 213 46 m_bpm2ms;
+#X floatatom 213 68 5 0 0 0 - - -;
+#X obj 213 87 / 8;
+#X floatatom 213 109 5 0 0 0 - - -;
+#X msg 213 19 120;
+#X obj 213 128 t b f;
+#X connect 0 0 5 0;
+#X connect 1 0 11 0;
+#X connect 3 0 4 0;
+#X connect 3 0 2 0;
+#X connect 4 0 3 1;
+#X connect 5 0 3 0;
+#X connect 6 0 8 0;
+#X connect 7 0 6 0;
+#X connect 8 0 9 0;
+#X connect 9 0 10 0;
+#X connect 10 0 13 0;
+#X connect 11 0 0 0;
+#X connect 11 1 7 0;
+#X connect 11 1 22 0;
+#X connect 12 0 6 0;
+#X connect 13 0 5 0;
+#X connect 13 1 5 1;
+#X connect 14 0 15 0;
+#X connect 14 0 17 0;
+#X connect 15 0 14 1;
+#X connect 16 0 14 0;
+#X connect 18 0 19 0;
+#X connect 19 0 20 0;
+#X connect 20 0 21 0;
+#X connect 21 0 23 0;
+#X connect 22 0 18 0;
+#X connect 23 0 16 0;
+#X connect 23 1 16 1;
+#X restore 49 96 pd timebase;
+#N canvas 203 23 489 617 io 0;
+#X obj 76 53 catch~ LEFT;
+#X obj 179 53 catch~ RIGHT;
+#X obj 286 272 s~ INPUT;
+#X obj 286 147 soundinput;
+#X obj 286 200 e_agc;
+#X obj 122 149 catch~ C;
+#X obj 286 221 *~ 0.7;
+#X obj 286 242 lop~ 4000;
+#X obj 76 540 dac~;
+#X obj 179 398 *~ 0.2;
+#X obj 76 398 *~ 0.2;
+#X connect 0 0 10 0;
+#X connect 1 0 9 0;
+#X connect 3 0 4 0;
+#X connect 4 0 6 0;
+#X connect 5 0 9 0;
+#X connect 5 0 10 0;
+#X connect 6 0 7 0;
+#X connect 7 0 2 0;
+#X connect 9 0 8 1;
+#X connect 10 0 8 0;
+#X restore 49 70 pd io sys;
+#N canvas 0 22 427 343 reverb 0;
+#X obj 29 146 e_reverb;
+#X obj 82 96 loadbang;
+#X obj 29 61 catch~ REVERB;
+#X msg 82 116 amp 95 \, hall 89 \, freq 3000 \, damp 60 \, dry 0;
+#X obj 113 267 throw~ RIGHT;
+#X obj 29 267 throw~ LEFT;
+#X connect 0 0 5 0;
+#X connect 0 1 4 0;
+#X connect 1 0 3 0;
+#X connect 2 0 0 0;
+#X connect 3 0 0 1;
+#X restore 57 608 pd reverb;
+#N canvas 75 200 1402 714 arrangement 0;
+#N canvas 172 143 1145 336 old-arrangement 0;
+#X obj 318 61 \$0;
+#X obj 428 61 \$0;
+#X obj 538 61 \$0;
+#X obj 208 61 \$0;
+#X obj 98 61 \$0;
+#X obj 868 61 \$0;
+#X obj 978 61 \$0;
+#X obj 758 61 \$0;
+#X obj 648 61 \$0;
+#X msg 98 84 \; \$1-Guitar-80 1 \; \$1-Guitar-110 0 \; \$1-RhythmGtr
+0 \; \$1-Bass-80 0 \; \$1-Bass-110 0 \; \$1-Bass2 0 \; \$1-Organ 1
+\; \$1-ElPiano-80 0 \; \$1-ElPiano-110 0 \; \$1-Mono-80 0 \; \$1-Mono-110
+0 \; \$1-Drums 0 \; \$1-bpm 80 \;;
+#X msg 208 84 \; \$1-Guitar-80 0 \; \$1-Guitar-110 0 \; \$1-RhythmGtr
+1 \; \$1-Bass-80 1 \; \$1-Bass-110 0 \; \$1-Bass2 0 \; \$1-Organ 1
+\; \$1-ElPiano-80 0 \; \$1-ElPiano-110 0 \; \$1-Mono-80 0 \; \$1-Mono-110
+0 \; \$1-Drums 1 \; \$1-bpm 80 \;;
+#X msg 318 84 \; \$1-Guitar-80 0 \; \$1-Guitar-110 0 \; \$1-RhythmGtr
+1 \; \$1-Bass-80 1 \; \$1-Bass-110 0 \; \$1-Bass2 0 \; \$1-Organ 1
+\; \$1-ElPiano-80 1 \; \$1-ElPiano-110 0 \; \$1-Mono-80 0 \; \$1-Mono-110
+0 \; \$1-Drums 1 \; \$1-bpm 80 \;;
+#X msg 428 84 \; \$1-Guitar-80 1 \; \$1-Guitar-110 0 \; \$1-RhythmGtr
+1 \; \$1-Bass-80 0 \; \$1-Bass-110 0 \; \$1-Bass2 1 \; \$1-Organ 1
+\; \$1-ElPiano-80 1 \; \$1-ElPiano-110 0 \; \$1-Mono-80 1 \; \$1-Mono-110
+0 \; \$1-Drums 1 \; \$1-bpm 80 \;;
+#X msg 538 84 \; \$1-Guitar-80 1 \; \$1-Guitar-110 0 \; \$1-RhythmGtr
+1 \; \$1-Bass-80 1 \; \$1-Bass-110 0 \; \$1-Bass2 1 \; \$1-Organ 1
+\; \$1-ElPiano-80 1 \; \$1-ElPiano-110 0 \; \$1-Mono-80 1 \; \$1-Mono-110
+0 \; \$1-Drums 1 \; \$1-bpm 80 \;;
+#X msg 648 84 \; \$1-Guitar-80 0 \; \$1-Guitar-110 1 \; \$1-RhythmGtr
+0 \; \$1-Bass-80 0 \; \$1-Bass-110 0 \; \$1-Bass2 0 \; \$1-Organ 0
+\; \$1-ElPiano-80 0 \; \$1-ElPiano-110 0 \; \$1-Mono-80 0 \; \$1-Mono-110
+0 \; \$1-Drums 0 \; \$1-bpm 110 \;;
+#X msg 758 84 \; \$1-Guitar-80 0 \; \$1-Guitar-110 1 \; \$1-RhythmGtr
+0 \; \$1-Bass-80 0 \; \$1-Bass-110 1 \; \$1-Bass2 0 \; \$1-Organ 0
+\; \$1-ElPiano-80 0 \; \$1-ElPiano-110 1 \; \$1-Mono-80 0 \; \$1-Mono-110
+0 \; \$1-Drums 0 \; \$1-bpm 110 \;;
+#X msg 868 84 \; \$1-Guitar-80 0 \; \$1-Guitar-110 0 \; \$1-RhythmGtr
+0 \; \$1-Bass-80 0 \; \$1-Bass-110 1 \; \$1-Bass2 0 \; \$1-Organ 0
+\; \$1-ElPiano-80 0 \; \$1-ElPiano-110 1 \; \$1-Mono-80 0 \; \$1-Mono-110
+1 \; \$1-Drums 0 \; \$1-bpm 110 \;;
+#X msg 978 84 \; \$1-Guitar-80 0 \; \$1-Guitar-110 1 \; \$1-RhythmGtr
+0 \; \$1-Bass-80 0 \; \$1-Bass-110 1 \; \$1-Bass2 0 \; \$1-Organ 0
+\; \$1-ElPiano-80 0 \; \$1-ElPiano-110 1 \; \$1-Mono-80 0 \; \$1-Mono-110
+1 \; \$1-Drums 0 \; \$1-bpm 110 \;;
+#X connect 0 0 11 0;
+#X connect 1 0 12 0;
+#X connect 2 0 13 0;
+#X connect 3 0 10 0;
+#X connect 4 0 9 0;
+#X connect 5 0 16 0;
+#X connect 6 0 17 0;
+#X connect 7 0 15 0;
+#X connect 8 0 14 0;
+#X restore 95 679 pd old-arrangement;
+#X obj 332 116 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
+-1 -1 3162 1;
+#X obj 329 158 int;
+#X obj 470 285 s \$0-RhythmGtr;
+#X obj 630 285 s \$0-ElPiano;
+#X obj 830 285 s \$0-Bass2;
+#X obj 329 256 > 0;
+#X obj 402 256 > 1;
+#X obj 470 256 > 2;
+#X obj 560 256 > 3;
+#X obj 630 256 > 4;
+#X obj 710 256 > 5;
+#X obj 770 256 > 6;
+#X obj 830 258 > 7;
+#X obj 329 7 r funky;
+#X obj 332 456 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
+-1 -1 0 1;
+#X obj 329 498 int;
+#X obj 329 567 s \$0-Mellon;
+#X obj 405 567 s \$0-Vorto;
+#X obj 474 567 s \$0-Goan;
+#X obj 329 387 r ambient;
+#X obj 329 537 > 0;
+#X obj 405 539 > 1;
+#X obj 474 539 > 2;
+#X floatatom 253 584 5 0 0 0 - - -;
+#X floatatom 276 221 5 0 0 0 - - -;
+#X obj 329 476 * 3.499;
+#X obj 662 456 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
+-1 -1 3187 1;
+#X obj 659 498 int;
+#X floatatom 583 584 5 0 0 0 - - -;
+#X obj 659 387 r money;
+#X obj 769 567 s \$0-Money;
+#X obj 1055 567 s \$0-Money-Mono;
+#X obj 839 567 s \$0-Money-Bass;
+#X obj 945 567 s \$0-Money-Piano;
+#X obj 560 285 s \$0-Organ;
+#X obj 329 49 *;
+#X obj 659 417 *;
+#X obj 659 537 > 0;
+#X obj 659 567 s \$0-Money-Snare;
+#X obj 769 537 > 1;
+#X obj 839 537 > 2;
+#X obj 945 538 > 3;
+#X obj 1055 542 > 4;
+#X obj 710 285 s \$0-Bass;
+#X obj 770 285 s \$0-Mono;
+#X obj 976 61 r mood;
+#X obj 976 93 s funky;
+#X obj 1016 115 swap 1;
+#X obj 1016 137 -;
+#X obj 1016 159 s money;
+#X obj 329 285 s \$0-Drums;
+#X obj 402 285 s \$0-Guitar;
+#X obj 329 136 * 8.999;
+#X obj 659 476 * 5.999;
+#X connect 1 0 53 0;
+#X connect 2 0 6 0;
+#X connect 2 0 7 0;
+#X connect 2 0 8 0;
+#X connect 2 0 9 0;
+#X connect 2 0 10 0;
+#X connect 2 0 11 0;
+#X connect 2 0 12 0;
+#X connect 2 0 13 0;
+#X connect 2 0 25 0;
+#X connect 6 0 51 0;
+#X connect 7 0 52 0;
+#X connect 8 0 3 0;
+#X connect 9 0 35 0;
+#X connect 10 0 4 0;
+#X connect 11 0 44 0;
+#X connect 12 0 45 0;
+#X connect 13 0 5 0;
+#X connect 14 0 36 0;
+#X connect 14 0 36 1;
+#X connect 15 0 26 0;
+#X connect 16 0 22 0;
+#X connect 16 0 23 0;
+#X connect 16 0 24 0;
+#X connect 20 0 15 0;
+#X connect 21 0 17 0;
+#X connect 22 0 18 0;
+#X connect 23 0 19 0;
+#X connect 26 0 16 0;
+#X connect 27 0 54 0;
+#X connect 28 0 29 0;
+#X connect 28 0 38 0;
+#X connect 28 0 40 0;
+#X connect 28 0 41 0;
+#X connect 28 0 42 0;
+#X connect 28 0 43 0;
+#X connect 30 0 37 0;
+#X connect 30 0 37 1;
+#X connect 36 0 1 0;
+#X connect 37 0 27 0;
+#X connect 38 0 39 0;
+#X connect 40 0 31 0;
+#X connect 41 0 33 0;
+#X connect 42 0 34 0;
+#X connect 43 0 32 0;
+#X connect 46 0 47 0;
+#X connect 46 0 48 0;
+#X connect 48 0 49 0;
+#X connect 48 1 49 1;
+#X connect 49 0 50 0;
+#X connect 53 0 2 0;
+#X connect 54 0 28 0;
+#X restore 49 142 pd arrangement;
+#N canvas 262 196 1248 576 playback 0;
+#X text 478 186 Money;
+#X text 60 18 Funky;
+#X obj 57 40 loop-player-mono \$0 4 ../sounds/80bpm/Guitar/GuitarC_80C
+Guitar funky;
+#X obj 57 81 loop-player-mono \$0 4 ../sounds/80bpm/Guitar/GuitarD_80C
+RhythmGtr funky;
+#X obj 57 113 loop-player-mono \$0 4 ../sounds/80bpm/Bass/BassC_80C
+Bass funky;
+#X obj 57 145 loop-player-mono \$0 4 ../sounds/80bpm/Bass/BassD_80C
+Bass2 funky;
+#X obj 57 179 loop-player \$0 4 ../sounds/80bpm/Organ/OrganC_80C Organ
+funky;
+#X obj 57 212 loop-player \$0 4 ../sounds/80bpm/ElectricPiano/EPianoC_80C
+ElPiano funky;
+#X obj 57 245 loop-player \$0 4 ../sounds/80bpm/Monosynth/MonoD_80C
+Mono funky;
+#X obj 57 280 loop-player \$0 4 ../sounds/80bpm/Drums/Drums Drums funky
+;
+#X obj 477 251 loop-player-money \$0 7 ../sounds/money/drums/Money
+Money money;
+#X obj 477 290 loop-player-mono \$0 4 ../sounds/80bpm/Bass/BassA_80D
+Money-Bass money;
+#X obj 477 330 loop-player-mono \$0 4 ../sounds/80bpm/Piano/PianoA_80D
+Money-Piano money;
+#X obj 477 370 loop-player-mono \$0 4 ../sounds/80bpm/Monosynth/MonoA_80D
+Money-Mono money;
+#X obj 477 211 snare-player-money \$0 7 ../sounds/money/drums/Money
+Money-Snare money;
+#X restore 49 171 pd playback;
+#X obj 205 391 catch~ funky-L;
+#X obj 205 513 throw~ LEFT;
+#X obj 315 391 catch~ funky-R;
+#X obj 316 513 throw~ RIGHT;
+#X obj 205 441 catch~ ambient-L;
+#X obj 316 441 catch~ ambient-R;
+#X obj 205 491 catch~ money-L;
+#X obj 316 491 catch~ money-R;
+#X obj 205 463 throw~ LEFT;
+#X obj 316 463 throw~ RIGHT;
+#X obj 205 413 throw~ LEFT;
+#X obj 315 413 throw~ RIGHT;
+#X obj 231 29 dumpOSC 12341;
+#X obj 231 161 sel sex money;
+#X obj 271 316 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
+-1 -1 6350 1;
+#X obj 268 336 s mood;
+#X obj 166 133 print;
+#X obj 268 294 line;
+#X msg 231 195 1;
+#X msg 268 195 0;
+#X msg 306 195 0.5;
+#X obj 423 272 throw~ LEFT;
+#X obj 453 292 throw~ RIGHT;
+#X obj 231 51 t a b;
+#X obj 423 61 osc~ 1000;
+#X obj 423 243 *~;
+#X msg 470 193 0;
+#X obj 438 221 sig~;
+#X msg 438 194 1;
+#X obj 439 136 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 470 171 del 600;
+#X obj 231 131 symbol;
+#X obj 268 272 pack 0 5000;
+#X obj 323 161 loadbang;
+#X msg 447 619 \; pd dsp 1 \; ;
+#X obj 447 597 loadbang;
+#X connect 6 0 16 0;
+#X connect 8 0 17 0;
+#X connect 10 0 14 0;
+#X connect 11 0 15 0;
+#X connect 12 0 7 0;
+#X connect 13 0 9 0;
+#X connect 18 0 22 0;
+#X connect 18 0 29 0;
+#X connect 19 0 24 0;
+#X connect 19 1 25 0;
+#X connect 19 2 26 0;
+#X connect 20 0 21 0;
+#X connect 23 0 20 0;
+#X connect 24 0 38 0;
+#X connect 25 0 38 0;
+#X connect 26 0 38 0;
+#X connect 29 0 37 0;
+#X connect 29 1 35 0;
+#X connect 30 0 31 0;
+#X connect 31 0 27 0;
+#X connect 31 0 28 0;
+#X connect 32 0 33 0;
+#X connect 33 0 31 1;
+#X connect 34 0 33 0;
+#X connect 35 0 34 0;
+#X connect 35 0 36 0;
+#X connect 36 0 32 0;
+#X connect 37 0 19 0;
+#X connect 38 0 23 0;
+#X connect 39 0 26 0;
+#X connect 41 0 40 0;
