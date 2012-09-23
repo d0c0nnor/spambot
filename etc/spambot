@@ -2,6 +2,8 @@
     ServerName www.warmspam.com
     LogLevel info
 
+    SetEnv SPAMBOT_SETTINGS_PROFILE PROD
+    
     WSGIDaemonProcess spambot user=arthack group=arthack processes=2 threads=15
     WSGIProcessGroup spambot
 

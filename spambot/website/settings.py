@@ -1,6 +1,9 @@
 import os
+import logging
+log = logging.getLogger(__name__)
 
 PROFILE = os.environ.get("SPAMBOT_SETTINGS_PROFILE", "DEV")
+log.warn("Using settings profile: %s" % PROFILE)
 
 ACCOUNT_SID = "ACe969e88fdc2000dc53581539404443d9"
 AUTH_TOKEN = "f618e5cd5362c61e1ee43d134dc2cdcb"

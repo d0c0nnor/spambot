@@ -27,10 +27,10 @@ window.CallStatusView = Backbone.View.extend({
        "completed" :
        {"style":"success",
         "message" : "You're recording has been logged successfully, thanks for taking part!"},
-       "failed" :
-       {"style":"error",
-        "message" : "Sorry, something appears to have gone wrong! If you have time, refresh the page and try again. Thanks!"},
-       "busy" : 
+      "failed" :
+      {"style":"error",
+       "message" : "Sorry, something appears to have gone wrong! If you have time, refresh the page and try again. Thanks!"},
+      "busy" : 
        {"style":"error",
         "message": "We tried to call you but you were engaged. If you have time, refresh the page and try again. Thanks!"},
        "no-answer":
