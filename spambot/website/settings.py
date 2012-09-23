@@ -1,6 +1,8 @@
 import os
 import logging
+logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
+
 
 PROFILE = os.environ.get("SPAMBOT_SETTINGS_PROFILE", "DEV")
 log.warn("Using settings profile: %s" % PROFILE)

@@ -8,7 +8,6 @@ import logging
 from spambot import spam
 from spambot.website import settings
 
-logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
 
 VALID_PHONE_NUMBER = re.compile('^\+[0-9]*$')
@@ -40,7 +39,7 @@ def recordings():
 @app.route("/record/<to_number>", methods=["GET", "POST"])
 def record(to_number):
     spam = spam.get_next()
-    logging.info("Showing spam %s" %(spam["spam_id"]))
+    log.info("Showing spam %s" %(spam["spam_id"]))
     return render_template('record.html', spam=spam, to_number=to_number)
 
 
@@ -58,7 +57,7 @@ def place_call():
         call = client.calls.create(to=to_number,  
                                from_=settings.OUR_NUMBER, 
                                url=_fqurl("/handle_call/" + topic + "/" + spam_id))
-        logging.info("Started call: " +  call.sid)
+        log.info("Started call: " +  call.sid)
         return json.dumps(call.sid)
     
 
@@ -100,7 +99,7 @@ def dial_a_spam():
             call = client.calls.create(to=to_number,  
                                        from_=settings.OUR_NUMBER, 
                                        url=_fqurl("/handle_dial_a_spam"))
-            logging.info("Started call: " +  call.sid)
+            log.info("Started call: " +  call.sid)
             return render_template("thanks.html")
     else:
         return render_template("dial_a_spam.html")
