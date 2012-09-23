@@ -62,7 +62,8 @@ window.RecordView = Backbone.View.extend({
 
     events: {
         "click #refresh_spam" : "refresh_spam",
-        "submit #callback_form" : "create_callback"
+        "submit #callback_form" : "create_callback",
+        "focus #phone_number" : "hide_errors"  
     },
     
     initialize: function() {
@@ -75,6 +76,11 @@ window.RecordView = Backbone.View.extend({
     
     render: function () {
         $(this.el).html(this.template(this.spam().toJSON()));
+        $("#phone_number").tooltip(
+            {"title" : "To create an Intl Phone Number from a U.K. number drop the '0' and add '+44'. <br/>For exmaple, 07428262123 should become +447428262123",
+             "trigger" : "focus",
+             "placement" : "right",
+            })
         return this;
     },
 
@@ -82,13 +88,16 @@ window.RecordView = Backbone.View.extend({
         this.collection.fetch()
     },
 
+    hide_errors: function() {
+        $("#phone_help").hide()
+    },
+    
     create_callback : function() {
 
         var number = $("#phone_number").val()
 
         if(! VALID_PHONE_NUMBER.test(number)){
-            $("#phone_control_group").addClass("error");
-            $("#phone_control_group .controls").append($("<span class='help-inline'><p>Please try again with a number in the form + Country Area Number.</p><p> For example: +4474281234567</p></span>"))
+            $("#phone_help").show()
             return false;
         }
         

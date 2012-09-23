@@ -46,6 +46,8 @@
         </div>
         <div class="span12 pagination-centered">
           <br />
+          <a href="http://134.0.22.13:8000/listen" class="btn btn-inverse">Listen Live</a>
+          <br />
           <br />
           <div class="lead">
             <p>Welcome to the <strong>warm spam</strong> project, part of the <a href="http://www.thedigitalsizzle.com/">Digital Sizzle 2012
@@ -67,10 +69,32 @@
             <br />
             <p>If you're ready, <a href="#record">lets get started!</a></p>
           </div>
+          <hr />
+          <p><small>With kind thanks to: </small></p>
+            <ul class="thumbnails">
+              <li class="span4">
+                <a href="http://www.twillio.com/" class="thumbnail">
+                  <img src="{{url_for('static', filename='img/twillio.png')}}" alt="Twillio"></img>
+                </a>
+              </li>
+              <li class="span4">
+                <a href="http://www.wirehive.net/" class="thumbnail">
+                  <img src="{{url_for('static', filename='img/wirehive.png')}}" alt="Wirehive"></img>
+                </a>
+              </li>
+              <li class="span4">
+                <a href="http://reactifymusic.com" class="thumbnail">
+                  <img src="{{url_for('static', filename='img/reactify.jpeg')}}" alt="Reactify"></img>
+                </a>
+              </li>
+            </ul>
+          <p class="small"><small>Created by: Danny O'Connor, Tiziano Santoro, Ragnar Hrafnke, Graham Hooper, Tom Rushmore</small></p>
+          <p class="small"><small>Special thanks to: Michael Hobson, Bryce Keane, Joe Scarboro, Parker Crockford.</small></p>
         </div>
       </div>
       
       <div class="row" id="record">
+        <!-- Template Renders Here -->
       </div>
 
       <script type="text/template" id="record_template"/>
@@ -98,6 +122,7 @@
               <label class="control-label" for="phone_number">Phone Number</label>
               <div class="controls">
                 <input type="text" id="phone_number" placeholder="Intl. Phone Number" />
+                <span id="phone_help" class='text-error' style="display:none"><p>Please try again with a number in the form + Country Area Number.</p><p> For example: +4474281234567</p></span>
               </div>
             </div>
             <div class="control-group">

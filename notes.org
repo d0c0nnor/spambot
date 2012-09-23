@@ -13,17 +13,23 @@
 ** DONE Mobile support
 ** TODO Mobile Warning
 ** TODO Fix validation stuff.
+** TODO Add the extra logos.
+** TODO Acknowledgements
 * Player
-** TODO Integrate wav file playing
-** TODO Audio streaming 
-** TODO Shoutcast server
+** DONE Integrate wav file playing
+** DONE Audio streaming 
+** DONE Shoutcast server
+** TODO Fix sampling rates.
+** TODO OSC Messages.
+** TODO Domain name in the radio station.
+** TODO Scriptify everything.
 * Spam Collector
 ** TODO Move code into a main method
 ** TODO Make it more robust to failure in the pop layer
 * Nice to have
 ** TODO Document classification in the spam collector
 ** TODO Nice logo
-** TODO Domain name
+** DONE Domain name
 * Waiting
 ** Fix the domain name issue
 ** Internet Radio
