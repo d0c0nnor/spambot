@@ -5,3 +5,15 @@ html {
 .justified {
     text-align: justify;
 }
+
+#welcome{
+    position: absolute;
+}
+
+#record {
+    position: absolute;
+}
+
+.phonebox {
+    background-color: white;
+}

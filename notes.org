@@ -7,11 +7,11 @@
 *** DONE Fix Github virtual env
 * Website
 ** DONE Redesign
-** Record Page
+** DONE Record Page
 - Change settings so I can run locally
-- 
-** TODO About page
-** TODO Mobile support
+** DONE About page
+** DONE Mobile support
+** TODO Mobile Warning
 * Player
 ** TODO Integrate wav file playing
 ** TODO Audio streaming 
@@ -19,7 +19,6 @@
 * Spam Collector
 ** TODO Move code into a main method
 ** TODO Make it more robust to failure in the pop layer
-
 * Nice to have
 ** TODO Document classification in the spam collector
 ** TODO Nice logo

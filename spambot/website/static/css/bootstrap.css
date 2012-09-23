@@ -159,10 +159,10 @@ textarea {
 
 body {
   margin: 0;
-  font-family: "Helvetica Neue", fixed-width;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 20px;
-  color: #333333;
+  color: #333333;           
 }
 
 a {
@@ -635,8 +635,8 @@ h6 {
   font-family: inherit;
   font-weight: bold;
   line-height: 1;
-  color: inherit;
   text-rendering: optimizelegibility;
+  font-family: "Pacifico", sans-serif;
 }
 
 h1 small,
@@ -791,7 +791,7 @@ abbr.initialism {
 blockquote {
   padding: 0 0 0 15px;
   margin: 0 0 20px;
-  border-left: 5px solid #eeeeee;
+  border-left: 5px solid #006dcc;
 }
 
 blockquote p {
@@ -849,7 +849,7 @@ address {
 code,
 pre {
   padding: 0 3px 2px;
-  font-family: "Courier", monospace, fixed-width;
+  font-family: "Courier New", monospace, fixed-width;
   font-size: 12px;
   color: #333333;
   -webkit-border-radius: 3px;
@@ -918,6 +918,7 @@ legend {
   color: #333333;
   border: 0;
   border-bottom: 1px solid #e5e5e5;
+  font-family: "Pacifico", sans-serif;
 }
 
 legend small {
@@ -939,7 +940,7 @@ input,
 button,
 select,
 textarea {
-  font-family: "Courier", monospace;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 label {
@@ -2937,7 +2938,7 @@ table [class*=span],
   min-height: 20px;
   padding: 19px;
   margin-bottom: 20px;
-  background-color: #f5f5f5;
+  background-color: #ffffff;
   border: 1px solid #e3e3e3;
   -webkit-border-radius: 4px;
      -moz-border-radius: 4px;
@@ -4293,7 +4294,7 @@ input[type="submit"].btn.btn-mini {
 .navbar-search .search-query {
   padding: 4px 14px;
   margin-bottom: 0;
-  font-family: "Courier", monospace;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 13px;
   font-weight: normal;
   line-height: 1;

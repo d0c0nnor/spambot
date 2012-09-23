@@ -1,74 +1,149 @@
-window.Spam = Backbone.Model.extend({
-    
+
+VALID_PHONE_NUMBER = /^\+[0-9]*$/;
+
+
+
+window.Spam = Backbone.Model.extend()
+
+window.SpamHolder = Backbone.Collection.extend({
+    model: Spam,
+    url: "/spam",
 })
 
-window.SpamFactory = {
-    get_next_spam : function(){
-        console.log("Getting next spam!")
-    }
-}
+window.CallStatus = Backbone.Model.extend({
+    urlRoot : "/callstatus"
+})
 
+window.CallStatusView = Backbone.View.extend({
+    el: "#callback_container",
 
-window.WelcomeView = Backbone.View.extend({
+    call_statuses : 
+    { "ringing" :
+      {"style":"info",
+       "message" : "We're currently ringing your phone, you should receive a call very soon."},
+      "in-progress" :
+      {"style":"info",
+       "message" : "Please follow the instructions laid out in the call. When you're finished speaking, just hang up."},
+       "completed" :
+       {"style":"success",
+        "message" : "You're recording has been logged successfully, thanks for taking part!"},
+       "failed" :
+       {"style":"error",
+        "message" : "Sorry, something appears to have gone wrong! If you have time, refresh the page and try again. Thanks!"},
+       "busy" : 
+       {"style":"error",
+        "message": "We tried to call you but you were engaged. If you have time, refresh the page and try again. Thanks!"},
+       "no-answer":
+       {"style":"error",
+        "message": "Sadly we couldn't reach you. If you have time, refresh the page and try again. Thanks!"}
+    },
 
-    el: "#content",
-
-    template: _.template($('#welcome_template').html()),
+    template: _.template("<span class='text-<%=style%>'><%=message%></span>"),
     
-    initialize:function () {
+    initialize: function() {
+        this.poller = PollingManager.getPoller(this.model);
+        this.model.on("change", this.render, this)
+        this.poller.start()
     },
 
-    events:{
-        "click #showMeBtn":"showMeBtnClick"
+    render: function() {
+        var status = this.model.get("status")
+        this.$el.html(this.template(this.call_statuses[status]))
+        if(!_.include(["ringing", "in-progress"], status)){
+            this.poller.stop()
+        }
+    }
+})
+
+window.RecordView = Backbone.View.extend({
+    el: "#record",
+
+    template: _.template($("#record_template").html()),
+
+    events: {
+        "click #refresh_spam" : "refresh_spam",
+        "submit #callback_form" : "create_callback"
+    },
+    
+    initialize: function() {
+        this.collection.on("reset", this.render, this)
     },
 
-    render:function () {
-        $(this.el).html(this.template());
+    spam: function() {
+        return this.collection.models[0]
+    },
+    
+    render: function () {
+        $(this.el).html(this.template(this.spam().toJSON()));
         return this;
     },
 
-    showMeBtnClick:function () {
-        app.headerView.search();
+    refresh_spam : function() {
+        this.collection.fetch()
+    },
+
+    create_callback : function() {
+
+        var number = $("#phone_number").val()
+
+        if(! VALID_PHONE_NUMBER.test(number)){
+            $("#phone_control_group").addClass("error");
+            $("#phone_control_group .controls").append($("<span class='help-inline'><p>Please try again with a number in the form + Country Area Number.</p><p> For example: +4474281234567</p></span>"))
+            return false;
+        }
+        
+        var topic = this.spam().get("topic")
+        var id = this.spam().id
+        that = this;
+        
+        $.post('/call',
+               {"to_number" : number, "topic" : topic, "spam_id": id},
+ 	       function(response_data) {
+                   var call_sid = JSON.parse(response_data)
+                   var callstatus = new CallStatus({"id" : call_sid})
+                   var callstatus_view = new CallStatusView({"model": callstatus})
+               });
+        
+        return false;
     }
-
-});
-
-
-window.RecordView = Backbone.View.extend({
     
-
 })
 
 
 var AppRouter = Backbone.Router.extend({
-
     routes: {
-        ""                  : "welcome",
-        "/record"           : "record", 
-        
-        // "wines/page/:page"	: "list",
-        // "wines/add"         : "addWine",
-        // "wines/:id"         : "wineDetails",
-        // "about"             : "about"
+        ""          : "welcome",
+        "record"    : "new_recording", 
     },
 
-    initialize: function () {
+    initialize : function() {
         
     },
-
-    welcome: function() {
-        if (!this.welcome_view) {
-            this.welcome_view = new WelcomeView();
-        }
-        
-        this.welcome_view.render()
-    },
-
-    record: function() {
-        this.record_view = new RecordView();
-    }
     
+    _show_instructions_if_required : function() {
+        $('#instructions_modal').modal("show");
+    },
 
+    _transition_out : function(selector) {
+        $(selector).effect("slide", { "direction" : "left",  "mode" : "hide"}, 1000)
+    },
+
+    _transition_in : function(selector, callback) {
+        $(selector).effect("slide", {"direction" : "right", "mode" : "show"}, 1000, callback)
+    },
+    
+    welcome: function() {
+        $("#record").hide()
+        $("#welcome").show()
+    },
+    
+    new_recording: function() {
+        this.spam_holder = new SpamHolder()
+        this.record_view = new RecordView({collection: this.spam_holder})
+        this._transition_out("#welcome")
+        this._transition_in(this.record_view.el, this._show_instructions_if_required)
+        this.spam_holder.fetch()
+    }
 });
 
 app = new AppRouter();

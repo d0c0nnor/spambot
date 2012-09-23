@@ -1,36 +1,40 @@
 # Module for collecting ( pre-collected ) spam
-import settings, random, os, codecs
+import random, os, codecs
+from spambot.website import settings
 
-def _get_spam_ids():
+def _get_ids():
     return os.listdir(settings.DATA_PATH)
 
-def get_spam_txt(spam_id):
+def get_txt(spam_id):
     with codecs.open(settings.DATA_PATH + os.path.sep + spam_id + os.path.sep + "message.txt", encoding='utf-8') as f:
         return unicode(f.read())
 
-def get_spam_topic(spam_id):
+def get_topic(spam_id):
     with open(settings.DATA_PATH + os.path.sep + spam_id + os.path.sep + "topic.txt") as f:
         return f.read()
-    
-def get_next_spam():
+
+def get(spam_id):
+    spam_txt = get_txt(spam_id)
+    spam_topic = get_topic(spam_id)
+    emotion = random.choice(settings.EMOTIONS)
+
+    return {"id" : spam_id,
+            "text" : spam_txt,
+            "emotion" : emotion,
+            "topic" : spam_topic
+            } 
+
+def get_next():
     """
     TODO: What should this do ?
     - should I check for ones that haven't been read already ?
     """
-    spam_id = random.choice(_get_spam_ids())
-    spam_txt = get_spam_txt(spam_id)
-    spam_topic = get_spam_topic(spam_id)
-    emotion = random.choice(settings.EMOTIONS)
-
-    return {"id" : spam_id,
-            "spam_txt" : spam_txt,
-            "emotion" : emotion,
-            "spam_topic" : spam_topic
-            } 
+    spam_id = random.choice(_get_ids())
+    return get(spam_id)
    
-def save_spam_recording(spam_id, emotion, url):
+def save_spam_recording(spam_id, topic, url):
     with open(settings.RECORDINGS_PATH, "a") as f:
-        f.write(spam_id + "," + emotion + "," + url + "\n")
+        f.write(spam_id + "," + topic + "," + url + "\n")
 
 def get_recordings_str():
     with open(settings.RECORDINGS_PATH, "r") as f:
