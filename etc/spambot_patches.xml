@@ -1,0 +1,29 @@
+<!DOCTYPE patchbay>
+<patchbay version="0.3.8" name="spambot_patches">
+ <output-sockets>
+  <socket exclusive="off" client="spambot" type="jack-audio" name="Spambot Player">
+   <plug>out_0</plug>
+   <plug>out_1</plug>
+  </socket>
+  <socket exclusive="off" client="pure_data_0" type="jack-audio" name="PureData">
+   <plug>output0</plug>
+   <plug>output1</plug>
+  </socket>
+ </output-sockets>
+ <input-sockets>
+  <socket exclusive="off" client="idjc-mx_default" type="jack-audio" name="Radio ( Spam )">
+   <plug>ch_in_3</plug>
+   <plug>ch_in_4</plug>
+  </socket>
+  <socket exclusive="off" client="idjc-mx_default" type="jack-audio" name="Radio ( Pure Data )">
+   <plug>ch_in_1</plug>
+   <plug>ch_in_2</plug>
+  </socket>
+ </input-sockets>
+ <slots/>
+ <cables>
+  <cable output="Spambot Player" input="Radio ( Spam )" type="jack-audio"/>
+  <cable output="PureData" input="Radio ( Pure Data )" type="jack-audio"/>
+ </cables>
+</patchbay>
+
