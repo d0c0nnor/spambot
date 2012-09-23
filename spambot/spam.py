@@ -44,9 +44,9 @@ def get_recordings():
     with open(settings.RECORDINGS_PATH, 'rb') as csvfile:
         recordings = []
         for line in csvfile.readlines():
-            recording_list = line.split(",")
+            recording_list = line.strip().split(",")
             recordings.append({"spam_id" : recording_list[0],
-                               "emotion" : recording_list[1],
+                               "topic" : recording_list[1],
                                "url": recording_list[2]})
         return recordings
             
