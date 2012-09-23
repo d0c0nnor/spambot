@@ -121,7 +121,10 @@ var AppRouter = Backbone.Router.extend({
     },
     
     _show_instructions_if_required : function() {
-        $('#instructions_modal').modal("show");
+        if($.cookie('should_show_instructions') == null){
+            $('#instructions_modal').modal("show");
+            $.cookie('should_show_instructions', '1');
+        }
     },
 
     _transition_out : function(selector) {

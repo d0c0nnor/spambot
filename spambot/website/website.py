@@ -81,6 +81,7 @@ def handle_recording(topic, spam_id):
     recording_url = request.values.get("RecordingUrl", None)
     resp = twilio.twiml.Response()
     spam.save_spam_recording(spam_id, topic, recording_url)
+    log.info("Saved recording %s successfully" % recording_url)
     resp.say("Thanks, this is what you said:")
     resp.play(recording_url)
     resp.say("Goodbye.")
