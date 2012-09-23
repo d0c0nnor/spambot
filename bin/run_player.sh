@@ -1,0 +1,5 @@
+
+export PYTHONPATH=$(dirname $0)/..
+export SPAMBOT_SETTINGS_PROFILE=PROD
+echo "PYTHON PATH IS $PYTHON_PATH, SPAMBOT_SETTINGS_PROFILE is $SPAMBOT_SETTINGS_PROFILE"
+python -m spambot.player.player
