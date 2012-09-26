@@ -11,19 +11,15 @@
   </socket>
  </output-sockets>
  <input-sockets>
-  <socket exclusive="off" client="idjc-mx_default" type="jack-audio" name="Radio ( Spam )">
-   <plug>ch_in_3</plug>
-   <plug>ch_in_4</plug>
-  </socket>
-  <socket exclusive="off" client="idjc-mx_default" type="jack-audio" name="Radio ( Pure Data )">
-   <plug>ch_in_1</plug>
-   <plug>ch_in_2</plug>
+  <socket exclusive="off" client="darkice" type="jack-audio" name="darkice">
+   <plug>left</plug>
+   <plug>right</plug>
   </socket>
  </input-sockets>
  <slots/>
  <cables>
-  <cable output="Spambot Player" input="Radio ( Spam )" type="jack-audio"/>
-  <cable output="PureData" input="Radio ( Pure Data )" type="jack-audio"/>
+  <cable output="Spambot Player" input="darkice" type="jack-audio"/>
+  <cable output="PureData" input="darkice" type="jack-audio"/>
  </cables>
 </patchbay>
 
