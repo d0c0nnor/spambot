@@ -83,7 +83,7 @@ if __name__ == "__main__":
     for account in accounts:
 
       # no need to kill the mailinator server!
-      time.sleep(2)
+      time.sleep(15)
       
       try: 
       
@@ -132,7 +132,7 @@ if __name__ == "__main__":
               f.close()
 
       except Exception, e:
-        logging.exception("Couldn't retrieve mail", e)
+        logging.exception("Couldn't retrieve mail")
 
 """
   s = raw_input("press 'n' for next, 's' for speak...\n\n\n")

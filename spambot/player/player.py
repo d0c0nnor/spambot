@@ -13,8 +13,8 @@ log = logging.getLogger(__name__)
 TIMEOUT = 10*1000
 
 def _play_command(url):
-    #return ["mplayer", '-ao', 'jack:name=spambot', url]
-    return ["mplayer", url]
+    return ["mplayer", '-ao', 'jack:name=spambot', url]
+    #return ["mplayer", url]
 
 if __name__ == "__main__":
 
@@ -28,8 +28,10 @@ if __name__ == "__main__":
             if topic in ["sex", "money"]:
                 log.info("Sending %s osc message" % (recording["topic"]))
                 c = OSC.OSCClient()
-                c.sendto(OSC.OSCMessage(topic), ("localhost",12341), 10)
+                c.sendto(OSC.OSCMessage("/%s" % topic), ("localhost",9998), 10)
                 time.sleep(5)
+            else:
+                c.sendto(OSC.OSCMessage("/neutral"), ("localhost",9998), 10)
             
             p = subprocess.Popen(_play_command(mp3_url))
             starttime = time.time()
@@ -41,7 +43,7 @@ if __name__ == "__main__":
                 log.error("Appears to be hung .. terminating process")
                 p.terminate()
             
-            log.info("Sleeping for 5 secs before next play")
+            log.info("Sleeping for 2 secs before next play")
             time.sleep(2)
         except:
             log.exception("An error occurred during playback!")
