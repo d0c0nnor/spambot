@@ -19,7 +19,7 @@ if PROFILE == "PROD":
     DATA_PATH="/var/spambot/data"
     RECORDINGS_PATH="/var/spambot/recordings.csv"
     BASE_URL = "http://134.0.22.13"
-    
+
 
 elif PROFILE == "DEV":
     DATA_PATH=os.path.dirname(__file__) + "/../sample_data"
